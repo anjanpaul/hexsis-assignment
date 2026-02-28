@@ -1,0 +1,31 @@
+.idea
+.terragrunt-cache
+**/.terragrunt-cache
+**/.terraform
+*.zip
+
+.terraform/
+**/.terraform/*
+terraform.tfstate
+terraform.tfstate.*
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# Terraform variable files (may contain secrets)
+terraform.tfvars
+*.tfvars
+
+# Terraform plan files
+*.tfplan
+
+# Terragrunt
+.terragrunt-cache/
+**/.terragrunt-cache/*
+
+# Scripts / OS
+*.log
+*.pid
+*.zip
+*.tar.gz
+.DS_Store
