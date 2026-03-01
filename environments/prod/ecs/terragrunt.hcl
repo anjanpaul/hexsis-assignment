@@ -26,7 +26,7 @@ inputs = {
   target_group_arn      = "arn:aws:elasticloadbalancing:ap-southeast-1:688567278489:targetgroup/hexsis-svc-prod-tg/0fd4c78b40058b2c"
 
   # ECS specific
-  container_image  = "688567278489.dkr.ecr.ap-southeast-1.amazonaws.com/my-portfolio:latest"
+  container_image  = "688567278489.dkr.ecr.ap-southeast-1.amazonaws.com/my-portfolio:3.0.0"
   container_port   = 80
   container_cpu    = 256
   container_memory = 512
