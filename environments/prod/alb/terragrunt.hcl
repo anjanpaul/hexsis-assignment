@@ -10,22 +10,16 @@ terraform {
   source = "../../../modules/alb"
 }
 
-dependency "vpc" {
-  config_path = "../vpc"
-
-  mock_outputs = {
-    vpc_id            = "vpc-00000000"
-    public_subnet_ids = ["subnet-00000000", "subnet-11111111"]
-  }
-}
+# No dependency blocks
 
 inputs = {
   aws_region   = local.env.locals.aws_region
   project_name = local.env.locals.project_name
   environment  = local.env.locals.environment
 
-  vpc_id            = dependency.vpc.outputs.vpc_id
-  public_subnet_ids = dependency.vpc.outputs.public_subnet_ids
+  # Manually set VPC values
+  vpc_id            = "vpc-09cafbe212ff0cbcf"
+  public_subnet_ids = ["subnet-0c7dcbf545cc18a82", "subnet-02eba0b0eacb867a9"]
 
   container_port    = 80
   health_check_path = "/"

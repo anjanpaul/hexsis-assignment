@@ -1,4 +1,4 @@
-# ---------- ALB Security Group ----------
+# ALB Security Group
 resource "aws_security_group" "alb" {
   name        = "${var.project_name}-${var.environment}-alb-sg"
   description = "ALB Security Group"
@@ -31,7 +31,7 @@ resource "aws_security_group" "alb" {
   }
 }
 
-# ---------- ALB ----------
+# ALB 
 resource "aws_lb" "main" {
   name               = "${var.project_name}-${var.environment}-alb"
   internal           = false
@@ -45,7 +45,7 @@ resource "aws_lb" "main" {
   }
 }
 
-# ---------- Target Group ----------
+# Target Group 
 resource "aws_lb_target_group" "main" {
   name        = "${var.project_name}-${var.environment}-tg"
   port        = var.container_port
@@ -67,7 +67,7 @@ resource "aws_lb_target_group" "main" {
   }
 }
 
-# ---------- HTTP Listener ----------
+# HTTP Listener 
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.main.arn
   port              = 80

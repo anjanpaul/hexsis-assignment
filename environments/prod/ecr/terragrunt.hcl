@@ -12,8 +12,8 @@ terraform {
 
 inputs = {
   aws_region      = local.env.locals.aws_region
-  repository_name = "my-portfolio"   # You control the name here
-  project_name    = local.env.locals.project_name    # Add
+  repository_name = "my-portfolio"   
+  project_name    = local.env.locals.project_name  
   environment     = local.env.locals.environment  
 
   image_tag_mutability = "MUTABLE"

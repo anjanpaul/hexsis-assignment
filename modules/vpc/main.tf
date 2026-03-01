@@ -1,6 +1,6 @@
-# ---------------------------------------------------------
+
 # Data Source — available AZs in the region
-# ---------------------------------------------------------
+
 data "aws_availability_zones" "available" {
   state = "available"
 }
@@ -9,9 +9,9 @@ locals {
   azs = slice(data.aws_availability_zones.available.names, 0, 2)
 }
 
-# ---------------------------------------------------------
+
 # VPC
-# ---------------------------------------------------------
+
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   enable_dns_support   = true
@@ -22,9 +22,9 @@ resource "aws_vpc" "main" {
   }
 }
 
-# ---------------------------------------------------------
+
 # Internet Gateway
-# ---------------------------------------------------------
+
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
@@ -33,9 +33,9 @@ resource "aws_internet_gateway" "main" {
   }
 }
 
-# ---------------------------------------------------------
+
 # Public Subnets (for ALB)
-# ---------------------------------------------------------
+
 resource "aws_subnet" "public" {
   count = length(var.public_subnet_cidrs)
 
@@ -70,9 +70,9 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
-# ---------------------------------------------------------
+
 # Private Subnets (for ECS tasks)
-# ---------------------------------------------------------
+
 resource "aws_subnet" "private" {
   count = length(var.private_subnet_cidrs)
 
@@ -86,9 +86,9 @@ resource "aws_subnet" "private" {
   }
 }
 
-# ---------------------------------------------------------
+
 # NAT Gateway (ECS needs outbound for image pull & logs)
-# ---------------------------------------------------------
+
 resource "aws_eip" "nat" {
   domain = "vpc"
 

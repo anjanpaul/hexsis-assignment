@@ -10,38 +10,25 @@ terraform {
   source = "../../../modules/ecs"
 }
 
-dependency "vpc" {
-  config_path = "../vpc"
-
-  mock_outputs = {
-    vpc_id             = "vpc-00000000"
-    private_subnet_ids = ["subnet-00000000", "subnet-11111111"]
-  }
-}
-
-dependency "alb" {
-  config_path = "../alb"
-
-  mock_outputs = {
-    target_group_arn      = "arn:aws:elasticloadbalancing:ap-southeast-1:000000000000:targetgroup/mock/000000000000"
-    alb_security_group_id = "sg-00000000"
-  }
-}
+# No dependency blocks at all
 
 inputs = {
   aws_region   = local.env.locals.aws_region
   project_name = local.env.locals.project_name
   environment  = local.env.locals.environment
 
-  vpc_id             = dependency.vpc.outputs.vpc_id
-  private_subnet_ids = dependency.vpc.outputs.private_subnet_ids
+  # Manually set VPC values
+  vpc_id             = "vpc-09cafbe212ff0cbcf"
+  private_subnet_ids = ["subnet-07969e7e9fb8cbfc4", "subnet-0bcd4a507287ce3a4"]
 
-  alb_security_group_id = dependency.alb.outputs.alb_security_group_id
-  target_group_arn      = dependency.alb.outputs.target_group_arn
+  # Manually set ALB values
+  alb_security_group_id = "sg-01803d296505d5aef"
+  target_group_arn      = "arn:aws:elasticloadbalancing:ap-southeast-1:688567278489:targetgroup/hexsis-svc-prod-tg/0fd4c78b40058b2c"
 
+  # ECS specific
   container_image  = "688567278489.dkr.ecr.ap-southeast-1.amazonaws.com/my-portfolio:latest"
   container_port   = 80
   container_cpu    = 256
   container_memory = 512
-  desired_count    = 3
+  desired_count    = 2
 }

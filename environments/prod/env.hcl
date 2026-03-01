@@ -1,4 +1,3 @@
-# Common variables for the production environment.
 # All modules under this folder inherit these values.
 
 locals {
